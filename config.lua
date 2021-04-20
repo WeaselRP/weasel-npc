@@ -5,10 +5,12 @@ Config = {
     RobPoliceAlertPercent = 40,
     RobDisplayCode = '500',
     RobCash = {20, 150}, --Random between the 2 values
+    RobCooldown = 3, -- in minutes
     
     Items = {
-        {'green-dongle', 1, 20}, -- Item name, Item amount, Percent Chance
-        {'red-dongle', 1, 5}
+        {'green-dongle', 1, 10}, -- Item name, Item amount, Percent Chance
+        {'yellow-dongle', 1, 5},
+        {'red-dongle', 1, 1}
     },
 
     -- Drugs
@@ -18,6 +20,7 @@ Config = {
     DrugPoliceAlertPercent = 40, -- Percent cahnce on failure to alert police
     MaxCanBuy = 5,
     DrugDisplayCode = '420',
+    DrugCooldown = 1, -- In minutes
 
     
 

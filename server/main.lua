@@ -52,7 +52,6 @@ AddEventHandler("weasel-npc:robNPC", function()
     local cash = math.random(Config.RobCash[1],Config.RobCash[2])
     xPlayer.addMoney(cash)
     
-
     for i,v in pairs(Config.Items) do
         local itemsRandom = math.random(1,100)
         if itemsRandom <= v[3] then
@@ -61,6 +60,8 @@ AddEventHandler("weasel-npc:robNPC", function()
             end
         end
     end
+
+    TriggerClientEvent("weasel-npc:startCooldown", _source, "rob")
 
 end)
 
@@ -107,5 +108,6 @@ AddEventHandler("weasel-npc:sellDrug", function()
             TriggerEvent('wf-alerts:svNotify', dispatchData)
         end
     end
+    TriggerClientEvent("weasel-npc:startCooldown", _source, "drug")
 end)
 

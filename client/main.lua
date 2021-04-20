@@ -3,6 +3,9 @@ hasDrugs = false
 selling = false
 robbing = false
 
+sellingCooldown = false
+robbingCooldown = false
+
 
 Citizen.CreateThread(function()
     while ESX == nil do
@@ -70,6 +73,19 @@ AddEventHandler("weasel-npc:setHasDrugs", function(drugs)
     hasDrugs = drugs
 end)
 
+RegisterNetEvent("weasel-npc:startCooldown")
+AddEventHandler("weasel-npc:startCooldown", function(type)
+    if type == "drug" then
+        sellingCooldown = true
+        Citizen.Wait(Config.DrugCooldown * 60000)
+        sellingCooldown = false
+    else
+        robbingCooldown = true
+        Citizen.Wait(Config.RobCooldown * 60000)
+        robbingCooldown = false
+    end
+end)
+
 function nearPedRob(ped)
     local npcPos = GetEntityCoords(ped)
     local playerPos = GetEntityCoords(GetPlayerPed(-1))
@@ -81,15 +97,16 @@ function nearPedRob(ped)
             Citizen.Wait(1000)
             return
         end
-
-        
-
         SetEntityAsMissionEntity(ped)
         TaskHandsUp(ped, 1000, GetPlayerPed(-1), -1, true)
         
         if dist < 2 then
             ESX.Game.Utils.DrawText3D(textLoc, "Press [~g~E~w~] to rob")
             if IsControlJustReleased(0, 153) then
+                if robbingCooldown then
+                    exports['mythic_notify']:SendAlert('error', 'You must wait to rob another local')
+                    return
+                end
                 robbing = true
                 TriggerServerEvent("weasel-npc:robNPCStart")
                 TriggerEvent("mythic_progbar:client:progress", {
@@ -125,6 +142,10 @@ function nearPedDrugs(ped, npcPos)
     
     ESX.Game.Utils.DrawText3D(textLoc, "Press [~g~E~w~] to sell drugs")
     if IsControlJustReleased(0, 153) then
+        if sellingCooldown then
+            exports['mythic_notify']:SendAlert('error', 'You must wait to sell more drugs')
+            return
+        end
         selling = true
         SetEntityAsMissionEntity(ped)
         TaskStandStill(ped, Config.TransactionTime)
