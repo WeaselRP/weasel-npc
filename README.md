@@ -4,7 +4,6 @@ Weasel NPC
   * [About](#about)
   * [Requirements](#Requirements)
   * [Features](#features)
-  * [TODO](#todo)
 
 About
 -------
