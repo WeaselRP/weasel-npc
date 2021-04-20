@@ -1,4 +1,4 @@
- Godot Lua Module
+Weasel NPC
 ===============
 **Table of contents:**
   * [About](#about)
