@@ -39,8 +39,10 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
-    Citizen.Wait(10000)
-    TriggerServerEvent("weasel-npc:hasDrugs")
+    while true do
+        Citizen.Wait(Config.UpdateTime)
+        TriggerServerEvent("weasel-npc:hasDrugs")
+    end
 end)
 
 RegisterNetEvent("weasel-npc:setHasDrugs")

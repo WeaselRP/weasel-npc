@@ -1,6 +1,7 @@
 Config = {
     TransactionTime = 10000,
-    AcceptPercent = 40,
+    UpdateTime = 2000,
+    AcceptPercent = 80,
     MaxCanBuy = 5,
     DisplayCode = '420',
 
