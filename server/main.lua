@@ -62,6 +62,7 @@ AddEventHandler("weasel-npc:sellDrug", function()
         success(_source, "They bought "..amountRandom.. " "..drug.label)
         xPlayer.removeInventoryItem(drug.name, amountRandom)
         xPlayer.addMoney(drugPrice * amountRandom)
+        TriggerEvent("weasel-npc:hasDrugs")
     else
         error(_source, "They have declined")
         local playerCoords = xPlayer.getCoords(true)
