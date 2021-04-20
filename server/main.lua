@@ -30,10 +30,44 @@ AddEventHandler("weasel-npc:hasDrugs", function()
     end
 end)
 
+RegisterNetEvent("weasel-npc:robNPCStart")
+AddEventHandler("weasel-npc:robNPCStart", function()
+    local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
+    local robRandom = math.random(1,100)
+    if robRandom <= Config.RobPoliceAlertPercent then
+        local playerCoords = xPlayer.getCoords(true)
+        local data = {displayCode = Config.RobDisplayCode, description = 'Robbery in progress', isImportant = 1, recipientList = {'police'}, length = '4000'}
+        local dispatchData = {dispatchData = data, caller = 'Local', coords = playerCoords}
+        TriggerEvent('wf-alerts:svNotify', dispatchData)
+    end
+end)
+
+RegisterNetEvent("weasel-npc:robNPC")
+AddEventHandler("weasel-npc:robNPC", function()
+    local _source = source
+    local xPlayer = ESX.GetPlayerFromId(_source)
+
+    success(_source, "You robbed the poor local")
+    local cash = math.random(Config.RobCash[1],Config.RobCash[2])
+    xPlayer.addMoney(cash)
+    
+
+    for i,v in pairs(Config.Items) do
+        local itemsRandom = math.random(1,100)
+        if itemsRandom <= v[3] then
+            if xPlayer.canCarryItem(v[1], v[2]) then
+                xPlayer.addInventoryItem(v[1], v[2])
+            end
+        end
+    end
+
+end)
+
 RegisterNetEvent("weasel-npc:sellDrug")
 AddEventHandler("weasel-npc:sellDrug", function()
     local _source = source
-    xPlayer = ESX.GetPlayerFromId(_source)
+    local xPlayer = ESX.GetPlayerFromId(_source)
     local buyRandom = math.random(1,100)
     if buyRandom <= Config.AcceptPercent then
         local drug = nil
@@ -65,10 +99,13 @@ AddEventHandler("weasel-npc:sellDrug", function()
         TriggerEvent("weasel-npc:hasDrugs")
     else
         error(_source, "They have declined")
-        local playerCoords = xPlayer.getCoords(true)
-        local data = {displayCode = Config.DisplayCode, description = 'Drug sale in progress', isImportant = 1, recipientList = {'police'}, length = '4000'}
-        local dispatchData = {dispatchData = data, caller = 'Local', coords = playerCoords}
-        TriggerEvent('wf-alerts:svNotify', dispatchData)
+        local copRandom = math.random(1,100)
+        if copRandom <= Config.DrugPoliceAlertPercent then
+            local playerCoords = xPlayer.getCoords(true)
+            local data = {displayCode = Config.DrugDisplayCode, description = 'Drug sale in progress', isImportant = 1, recipientList = {'police'}, length = '4000'}
+            local dispatchData = {dispatchData = data, caller = 'Local', coords = playerCoords}
+            TriggerEvent('wf-alerts:svNotify', dispatchData)
+        end
     end
 end)
 

@@ -20,9 +20,7 @@ Features
 --------------------------------
 - Sell drugs listed in config to NPC's for a set price
 - Set the max amount that can be sold per transaction, random between 1 and Max
-- Alert police on filed transaction
+- Alert police on filed transaction with random percent chance
+- Rob locals for money and items specified in config
 
-TODO
------
-- Add random chance to alert police on a failed transaction
-- Add NPC's robberies
+
