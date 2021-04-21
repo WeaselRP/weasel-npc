@@ -10,7 +10,8 @@ Config = {
     Items = {
         {'green-dongle', 1, 10}, -- Item name, Item amount, Percent Chance
         {'yellow-dongle', 1, 5},
-        {'red-dongle', 1, 1}
+        {'red-dongle', 1, 1},
+        {'precious_tear', 1, 1}
     },
 
     -- Drugs
@@ -21,8 +22,6 @@ Config = {
     MaxCanBuy = 5,
     DrugDisplayCode = '420',
     DrugCooldown = 1, -- In minutes
-
-    
 
     Drugs = {
         {'weed_pouch', (math.random(210, 340))},

@@ -42,12 +42,17 @@ Citizen.CreateThread(function()
     end
 end)
 
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(Config.UpdateTime)
-        TriggerServerEvent("weasel-npc:hasDrugs")
-    end
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(playerData)
+    Citizen.CreateThread(function()
+        while true do
+            Citizen.Wait(Config.UpdateTime)
+            TriggerServerEvent("weasel-npc:hasDrugs")
+        end
+    end)
 end)
+
+
 
 Citizen.CreateThread(function() -- Creates thread
 
