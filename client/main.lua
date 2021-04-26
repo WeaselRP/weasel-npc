@@ -15,11 +15,12 @@ Citizen.CreateThread(function()
 end)
 
 
+
 Citizen.CreateThread(function()
 
     while true do
         Wait(0)
-        if hasDrugs and not selling then
+        if hasDrugs and not selling and not sellingCooldown then
             
             local player = GetPlayerPed(-1)
             local playerPos = GetEntityCoords(player)
@@ -62,7 +63,7 @@ Citizen.CreateThread(function() -- Creates thread
         if not robbing then
             local aiming, ped = GetEntityPlayerIsFreeAimingAt(PlayerId(-1))
             if aiming then
-                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and IsPedHuman(ped) then
+                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and IsPedHuman(ped) and not IsPedAPlayer(ped) then
                     nearPedRob(ped)
                     lastPed = ped
                 end

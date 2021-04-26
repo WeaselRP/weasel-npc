@@ -56,7 +56,7 @@ AddEventHandler("weasel-npc:robNPC", function()
         local itemsRandom = math.random(1,100)
         if itemsRandom <= v[3] then
             if xPlayer.canCarryItem(v[1], v[2]) then
-                xPlayer.addInventoryItem(v[1], v[2])
+                xPlayer.addInventoryItem(v[1], v[2], v[4])
             end
         end
     end
