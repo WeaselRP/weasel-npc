@@ -17,8 +17,9 @@ end
 
 RegisterNetEvent("weasel-npc:hasDrugs")
 AddEventHandler("weasel-npc:hasDrugs", function()
-    local _source = source
-    xPlayer = ESX.GetPlayerFromId(_source)
+    xPlayer = ESX.GetPlayerFromId(source)
+    if not xPlayer then return end
+    
     for i,v in pairs(Config.Drugs) do
         xItem = xPlayer.getInventoryItem(v[1])
         if xItem and xItem.count >= 1 then

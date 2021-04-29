@@ -1,4 +1,4 @@
-description "Weasel NPC System"
+description "Weasel Crafting System"
 
 client_scripts {
     'config.lua',

@@ -16,12 +16,12 @@ Config = {
 
     -- Drugs
     UpdateTime = 2000,
-    TransactionTime = 13000,
+    TransactionTime = 1.5 * 60000 ,
     AcceptPercent = 75,
     DrugPoliceAlertPercent = 75, -- Percent cahnce on failure to alert police
     MaxCanBuy = 3,
     DrugDisplayCode = '420',
-    DrugCooldown = 3, -- In minutes
+    DrugCooldown = 1, -- In minutes
 
     Drugs = {
         {'weed_pouch', (math.random(150, 300))},
