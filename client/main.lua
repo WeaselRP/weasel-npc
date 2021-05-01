@@ -156,7 +156,6 @@ function nearPedDrugs(ped, npcPos)
         selling = true
         SetEntityAsMissionEntity(ped)
         TaskStandStill(ped, Config.TransactionTime)
-        exports['mythic_notify']:SendAlert('success', 'Press E to Cancel')
         TriggerEvent("mythic_progbar:client:progress", {
             name = "attempt_sell_drugs",
             duration = Config.TransactionTime,
