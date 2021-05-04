@@ -30,7 +30,7 @@ Citizen.CreateThread(function()
                 local npcPos = GetEntityCoords(ped)
                 local dist = #(npcPos - playerPos)
                 local aiming, ped = GetEntityPlayerIsFreeAimingAt(PlayerId(-1))
-                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and not IsPedInAnyVehicle(ped) and not aiming then
+                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and not IsPedInAnyVehicle(ped) then
                     local pedType = GetPedType(ped)
                     if pedType ~= 28 and not IsPedAPlayer(ped) then
                         if dist <= 2 then
