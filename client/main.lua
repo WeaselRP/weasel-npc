@@ -29,7 +29,8 @@ Citizen.CreateThread(function()
                 success, ped = FindNextPed(handle)
                 local npcPos = GetEntityCoords(ped)
                 local dist = #(npcPos - playerPos)
-                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and not IsPedInAnyVehicle(ped) then
+                local aiming, ped = GetEntityPlayerIsFreeAimingAt(PlayerId(-1))
+                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and not IsPedInAnyVehicle(ped) and not aiming then
                     local pedType = GetPedType(ped)
                     if pedType ~= 28 and not IsPedAPlayer(ped) then
                         if dist <= 2 then
@@ -64,7 +65,7 @@ Citizen.CreateThread(function() -- Creates thread
         if not robbing then
             local aiming, ped = GetEntityPlayerIsFreeAimingAt(PlayerId(-1))
             if aiming then
-                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and IsPedHuman(ped) and not IsPedAPlayer(ped) and not (hasDrugs or sellingCooldown)  then
+                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and IsPedHuman(ped) and not IsPedAPlayer(ped) then
                     nearPedRob(ped)
                     lastPed = ped
                 end
