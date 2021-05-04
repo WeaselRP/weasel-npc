@@ -64,7 +64,7 @@ Citizen.CreateThread(function() -- Creates thread
         if not robbing then
             local aiming, ped = GetEntityPlayerIsFreeAimingAt(PlayerId(-1))
             if aiming then
-                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and IsPedHuman(ped) and not IsPedAPlayer(ped) then
+                if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and IsPedHuman(ped) and not IsPedAPlayer(ped) and not (hasDrugs or sellingCooldown)  then
                     nearPedRob(ped)
                     lastPed = ped
                 end
