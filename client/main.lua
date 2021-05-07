@@ -20,7 +20,8 @@ Citizen.CreateThread(function()
 
     while true do
         Wait(0)
-        if hasDrugs and not selling and not sellingCooldown then
+        local isArmed = IsPedArmed(GetPlayerPed(-1), 7) and IsPedArmed(GetPlayerPed(-1), 4)
+        if hasDrugs and not selling and not sellingCooldown and not isArmed then
             
             local player = GetPlayerPed(-1)
             local playerPos = GetEntityCoords(player)
@@ -57,11 +58,11 @@ end)
 
 
 Citizen.CreateThread(function() -- Creates thread
-
+    local isArmed = IsPedArmed(GetPlayerPed(-1), 7) and IsPedArmed(GetPlayerPed(-1), 4)
     local lastPed = nil
 	while Config.EnableRobNPC do
 		Wait(0)
-        if not robbing then
+        if not robbing and isArmed then
             local aiming, ped = GetEntityPlayerIsFreeAimingAt(PlayerId(-1))
             if aiming then
                 if not IsPedInAnyVehicle(GetPlayerPed(-1)) and DoesEntityExist(ped) and not IsPedDeadOrDying(ped) and IsPedHuman(ped) and not IsPedAPlayer(ped) then
