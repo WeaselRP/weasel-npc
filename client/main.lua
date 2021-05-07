@@ -58,10 +58,11 @@ end)
 
 
 Citizen.CreateThread(function() -- Creates thread
-    local isArmed = IsPedArmed(GetPlayerPed(-1), 7) and IsPedArmed(GetPlayerPed(-1), 4)
+    
     local lastPed = nil
 	while Config.EnableRobNPC do
 		Wait(0)
+        local isArmed = IsPedArmed(GetPlayerPed(-1), 7) and IsPedArmed(GetPlayerPed(-1), 4)
         if not robbing and isArmed then
             local aiming, ped = GetEntityPlayerIsFreeAimingAt(PlayerId(-1))
             if aiming then
