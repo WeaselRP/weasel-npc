@@ -5,15 +5,53 @@ robbing = false
 
 sellingCooldown = false
 robbingCooldown = false
+PlayerLoaded = false
 
 
-Citizen.CreateThread(function()
-    while ESX == nil do
-        Wait(0)
-        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-    end
+TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer)
+	ESX.PlayerData = xPlayer
+	Citizen.Wait(1000)
+	StartResource()
 end)
 
+StartResource = function()
+	Citizen.CreateThread(function()
+		Citizen.Wait(8000)
+		PlayerLoaded = true
+		StartLoop()
+	end)
+end
+
+local function has_value (tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+
+    return false
+end
+
+StartLoop = function()
+	Citizen.CreateThread(function()
+		while PlayerLoaded do
+			Wait(Config.UpdateTime)
+			ESX.PlayerData.inventory = ESX.GetPlayerData().inventory
+            hasDrugs = false
+            for k, v in pairs(ESX.PlayerData.inventory) do
+				if has_value(Config.DrugNames, v.name) then
+                    hasDrugs = true
+                    break
+                end
+			end
+        end
+    end)
+end
+
+if ESX.IsPlayerLoaded() then StartResource() end
 
 
 Citizen.CreateThread(function()
@@ -44,19 +82,6 @@ Citizen.CreateThread(function()
     end
 end)
 
-
-RegisterNetEvent('esx:playerLoaded')
-AddEventHandler('esx:playerLoaded', function(playerData)
-    Citizen.CreateThread(function()
-        while true do
-            Citizen.Wait(Config.UpdateTime)
-            TriggerServerEvent("weasel-npc:hasDrugs")
-        end
-    end)
-end)
-
-
-
 Citizen.CreateThread(function() -- Creates thread
     
     local lastPed = nil
@@ -75,11 +100,6 @@ Citizen.CreateThread(function() -- Creates thread
             TaskHandsUp(lastPed, 1000, GetPlayerPed(-1), -1, true)
         end
 	end
-end)
-
-RegisterNetEvent("weasel-npc:setHasDrugs")
-AddEventHandler("weasel-npc:setHasDrugs", function(drugs)
-    hasDrugs = drugs
 end)
 
 RegisterNetEvent("weasel-npc:startCooldown")

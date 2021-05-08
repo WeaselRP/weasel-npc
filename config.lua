@@ -4,7 +4,7 @@ Config = {
     RobTime = 20000,
     RobPoliceAlertPercent = 40,
     RobDisplayCode = '500',
-    RobCash = {20, 50}, --Random between the 2 values
+    RobCash = {20, 75}, --Random between the 2 values
     RobCooldown = 3.5, -- in minutes
     
     Items = {
@@ -16,17 +16,21 @@ Config = {
 
     -- Drugs
     UpdateTime = 2000,
-    TransactionTime = 33000,
+    TransactionTime = 30000,
     AcceptPercent = 75,
     DrugPoliceAlertPercent = 75, -- Percent cahnce on failure to alert police
     MaxCanBuy = 3,
     DrugDisplayCode = '420',
     DrugCooldown = 0.5, -- In minutes
-
+    DrugNames = {
+        'weed_pouch',
+        'meth_pouch', 
+        'coke_pouch'
+    },
     Drugs = {
         {'weed_pouch', (math.random(150, 250))},
-        {'meth_pouch', (math.random(780, 940))},
-        {'coke_pouch', (math.random(300, 500))}
+        {'meth_pouch', (math.random(300, 500))},
+        {'coke_pouch', (math.random(400, 600))}
     }
 }
 

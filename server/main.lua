@@ -15,22 +15,6 @@ function error(source, msg)
     TriggerClientEvent('mythic_notify:client:SendAlert', source, { type = 'error', text = msg, length = 2500 })
 end
 
-RegisterNetEvent("weasel-npc:hasDrugs")
-AddEventHandler("weasel-npc:hasDrugs", function()
-    local _source = source
-    xPlayer = ESX.GetPlayerFromId(_source)
-    if xPlayer == nil then return end
-    for i,v in pairs(Config.Drugs) do
-        xItem = xPlayer.getInventoryItem(v[1])
-        if xItem and xItem.count >= 1 then
-            TriggerClientEvent("weasel-npc:setHasDrugs", _source, true)
-            break
-        else
-            TriggerClientEvent("weasel-npc:setHasDrugs", _source, false)
-        end
-    end
-end)
-
 RegisterNetEvent("weasel-npc:robNPCStart")
 AddEventHandler("weasel-npc:robNPCStart", function()
     local _source = source
@@ -98,7 +82,6 @@ AddEventHandler("weasel-npc:sellDrug", function()
         success(_source, "They bought "..amountRandom.. " "..drug.label)
         xPlayer.removeInventoryItem(drug.name, amountRandom)
         xPlayer.addMoney(drugPrice * amountRandom)
-        TriggerEvent("weasel-npc:hasDrugs")
     else
         error(_source, "They have declined")
         local copRandom = math.random(1,100)
