@@ -29,7 +29,7 @@ Config = {
     },
     Drugs = {
         {'weed_pouch', (math.random(150, 250))},
-        {'meth_pouch', (math.random(300, 500))},
+        {'meth_pouch', (math.random(900, 1500))},
         {'coke_pouch', (math.random(400, 600))}
     }
 }
