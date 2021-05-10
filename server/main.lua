@@ -62,7 +62,7 @@ AddEventHandler("weasel-npc:sellDrug", function()
             xItem = xPlayer.getInventoryItem(v[1])
             if xItem and xItem.count >= 1 then
                 drug = xItem
-                drugPrice = v[2]
+                drugPrice = math.random(v[2], v[3])
                 break
             end
         end
