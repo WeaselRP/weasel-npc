@@ -17,7 +17,7 @@ Config = {
     -- Drugs
     UpdateTime = 2000,
     TransactionTime = 30000,
-    AcceptPercent = 75,
+    AcceptPercent = 65,
     DrugPoliceAlertPercent = 75, -- Percent cahnce on failure to alert police
     MaxCanBuy = 3,
     DrugDisplayCode = '420',
