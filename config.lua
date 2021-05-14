@@ -25,12 +25,14 @@ Config = {
     DrugNames = {
         'weed_pouch',
         'meth_pouch', 
-        'coke_pouch'
+        'coke_pouch',
+        'lsd_tab'
     },
     Drugs = {
         {'weed_pouch', 150, 250},
         {'meth_pouch', 400, 600},
-        {'coke_pouch', 300, 500}
+        {'coke_pouch', 300, 500},
+        {'lsd_tab', 8, 20},
     }
 }
 
