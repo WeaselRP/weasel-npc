@@ -22,12 +22,6 @@ Config = {
     MaxCanBuy = 3,
     DrugDisplayCode = '420',
     DrugCooldown = 0.5, -- In minutes
-    DrugNames = {
-        'weed_pouch',
-        'meth_pouch', 
-        'coke_pouch',
-        'lsd_tab'
-    },
     Drugs = {
         {'weed_pouch', 150, 250},
         {'meth_pouch', 400, 600},

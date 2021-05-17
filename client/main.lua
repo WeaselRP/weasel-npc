@@ -27,7 +27,7 @@ end
 
 local function has_value (tab, val)
     for index, value in ipairs(tab) do
-        if value == val then
+        if value[1] == val then
             return true
         end
     end
@@ -42,7 +42,7 @@ StartLoop = function()
 			ESX.PlayerData.inventory = ESX.GetPlayerData().inventory
             hasDrugs = false
             for k, v in pairs(ESX.PlayerData.inventory) do
-				if has_value(Config.DrugNames, v.name) then
+				if has_value(Config.Drugs, v.name) then
                     hasDrugs = true
                     break
                 end
