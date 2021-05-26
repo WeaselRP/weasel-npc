@@ -26,6 +26,7 @@ Config = {
         {'weed_pouch', 250, 350},
         {'meth_pouch', 300, 500},
         {'coke_pouch', 400, 600},
+        {'crack_pouch', 350, 500},
         {'lsd_tab', 8, 20},
     }
 }
