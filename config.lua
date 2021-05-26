@@ -11,6 +11,9 @@ Config = {
         {'green-dongle', 1, 5, {type=5}}, -- Item name, Item amount, Percent Chance
         {'yellow-dongle', 1, 2, {type=5}},
         {'red-dongle', 1, 1, {type=5}},
+        {'gold_necklace', 1, 10, {}},
+        {'gold_watch', 1, 10, {}},
+        {'platinum_watch', 1, 4, {}},
         {'precious_tear', 1, 1, {}}
     },
 
