@@ -31,6 +31,7 @@ Config = {
         {'coke_pouch', 400, 600},
         {'crack_pouch', 350, 500},
         {'lsd_tab', 8, 20},
+        {'dmt_pouch', 200, 600},
     }
 }
 
