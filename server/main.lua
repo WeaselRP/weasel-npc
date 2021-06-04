@@ -36,6 +36,7 @@ AddEventHandler("weasel-npc:robNPC", function()
     success(_source, "You robbed the poor local")
     local cash = math.random(Config.RobCash[1],Config.RobCash[2])
     xPlayer.addMoney(cash)
+    TriggerEvent("weasel-analytics:logTransaction", 'money', cash, xPlayer.getName(), "Robbed NPC")
     
     for i,v in pairs(Config.Items) do
         local itemsRandom = math.random(1,100)
@@ -82,6 +83,7 @@ AddEventHandler("weasel-npc:sellDrug", function()
         success(_source, "They bought "..amountRandom.. " "..drug.label)
         xPlayer.removeInventoryItem(drug.name, amountRandom)
         xPlayer.addMoney(drugPrice * amountRandom)
+        TriggerEvent("weasel-analytics:logTransaction", 'money', drugPrice * amountRandom, xPlayer.getName(), "Drug Sale: "..drug.label)
     else
         error(_source, "They have declined")
         local copRandom = math.random(1,100)
