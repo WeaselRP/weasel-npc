@@ -6,6 +6,8 @@ robbing = false
 sellingCooldown = false
 robbingCooldown = false
 PlayerLoaded = false
+hotspotLocation = nil
+blip = nil
 
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
@@ -102,6 +104,16 @@ Citizen.CreateThread(function() -- Creates thread
 	end
 end)
 
+RegisterNetEvent("weasel-npc:hotspotChange")
+AddEventHandler("weasel-npc:hotspotChange", function(i)
+    RemoveBlip(blip)
+    blip = AddBlipForRadius(Config.DrugHotspots[i].x, Config.DrugHotspots[i].y, Config.DrugHotspots[i].z, Config.DrugHotspotRadius)
+    hotspotLocation = Config.DrugHotspots[i]
+    SetBlipSprite(blip,148)
+    SetBlipColour(blip,2)
+    SetBlipAlpha(blip,80)
+end)
+
 RegisterNetEvent("weasel-npc:startCooldown")
 AddEventHandler("weasel-npc:startCooldown", function(type)
     if type == "drug" then
@@ -168,7 +180,7 @@ end
 
 function nearPedDrugs(ped, npcPos)
     local textLoc = vector3(npcPos.x, npcPos.y, npcPos.z+0.2)
-    
+    local playerPos = GetEntityCoords(GetPlayerPed(-1))
     ESX.Game.Utils.DrawText3D(textLoc, "Press [~g~E~w~] to sell drugs")
     if IsControlJustReleased(0, 153) then
         if sellingCooldown then
@@ -195,12 +207,13 @@ function nearPedDrugs(ped, npcPos)
                 anim = "idle_a",
             }
         }, function(status)
-            if not status then
-                TriggerServerEvent("weasel-npc:sellDrug")
+            if not status and #(playerPos-hotspotLocation) <= Config.DrugHotspotRadius then
+                TriggerServerEvent("weasel-npc:sellDrug", true)
+            elseif not status then
+                TriggerServerEvent("weasel-npc:sellDrug", false)
             end
             selling = false
             SetPedAsNoLongerNeeded(ped)
         end)
     end
 end
-

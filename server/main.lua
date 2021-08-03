@@ -52,7 +52,7 @@ AddEventHandler("weasel-npc:robNPC", function()
 end)
 
 RegisterNetEvent("weasel-npc:sellDrug")
-AddEventHandler("weasel-npc:sellDrug", function()
+AddEventHandler("weasel-npc:sellDrug", function(isClose)
     local _source = source
     local xPlayer = ESX.GetPlayerFromId(_source)
     local buyRandom = math.random(1,100)
@@ -78,7 +78,9 @@ AddEventHandler("weasel-npc:sellDrug", function()
         else
             MaxCanBuy = Config.MaxCanBuy
         end
-
+        if isClose then
+            drugPrice = drugPrice * Config.DrugHotspotMultiplier
+        end
         local amountRandom = math.random(1, MaxCanBuy)
         success(_source, "They bought "..amountRandom.. " "..drug.label)
         xPlayer.removeInventoryItem(drug.name, amountRandom)
@@ -97,3 +99,10 @@ AddEventHandler("weasel-npc:sellDrug", function()
     TriggerClientEvent("weasel-npc:startCooldown", _source, "drug")
 end)
 
+Citizen.CreateThread(function()
+    while true do
+        i = math.random(1,#Config.DrugHotspots)
+        TriggerClientEvent("weasel-npc:hotspotChange", -1, i)
+        Citizen.Wait(Config.DrugHotspotSwapTime * 60000)
+    end
+end)
