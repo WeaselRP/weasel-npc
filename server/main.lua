@@ -1,5 +1,7 @@
 ESX = nil
 
+location = nil
+
 Citizen.CreateThread(function()
     while ESX == nil do
         TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
@@ -101,8 +103,13 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        i = math.random(1,#Config.DrugHotspots)
-        TriggerClientEvent("weasel-npc:hotspotChange", -1, i)
+        location = math.random(1,#Config.DrugHotspots)
+        TriggerClientEvent("weasel-npc:hotspotChange", -1, location)
         Citizen.Wait(Config.DrugHotspotSwapTime * 60000)
     end
+end)
+
+RegisterNetEvent("weasel-npc:getLocation")
+AddEventHandler("weasel-npc:getLocation", function()
+    TriggerClientEvent("weasel-npc:pullLocation", -1, location)
 end)

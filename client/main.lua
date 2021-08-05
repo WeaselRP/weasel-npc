@@ -16,6 +16,7 @@ RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
 	ESX.PlayerData = xPlayer
 	Citizen.Wait(1000)
+    TriggerServerEvent("weasel-npc:getLocation")
 	StartResource()
 end)
 
@@ -26,6 +27,12 @@ StartResource = function()
 		StartLoop()
 	end)
 end
+
+RegisterNetEvent("weasel-npc:pullLocation")
+AddEventHandler("weasel-npc:pullLocation", function(a)
+    hotspotLocation = a
+    setLocation(a)
+end)
 
 local function has_value (tab, val)
     for index, value in ipairs(tab) do
@@ -53,7 +60,10 @@ StartLoop = function()
     end)
 end
 
-if ESX.IsPlayerLoaded() then StartResource() end
+if ESX.IsPlayerLoaded() then 
+    TriggerServerEvent("weasel-npc:getLocation")
+    StartResource()
+ end
 
 
 Citizen.CreateThread(function()
@@ -106,13 +116,17 @@ end)
 
 RegisterNetEvent("weasel-npc:hotspotChange")
 AddEventHandler("weasel-npc:hotspotChange", function(i)
+    setLocation(i)
+end)
+
+setLocation = function(i)
     RemoveBlip(blip)
     blip = AddBlipForRadius(Config.DrugHotspots[i].x, Config.DrugHotspots[i].y, Config.DrugHotspots[i].z, Config.DrugHotspotRadius)
     hotspotLocation = Config.DrugHotspots[i]
     SetBlipSprite(blip,148)
     SetBlipColour(blip,2)
     SetBlipAlpha(blip,80)
-end)
+end
 
 RegisterNetEvent("weasel-npc:startCooldown")
 AddEventHandler("weasel-npc:startCooldown", function(type)
@@ -207,7 +221,9 @@ function nearPedDrugs(ped, npcPos)
                 anim = "idle_a",
             }
         }, function(status)
-            if not status and #(playerPos-hotspotLocation) <= Config.DrugHotspotRadius then
+            if not status and hotspotLocation == nil then
+                TriggerServerEvent("weasel-npc:sellDrug", false)
+            elseif not status and #(playerPos-hotspotLocation) <= Config.DrugHotspotRadius then
                 TriggerServerEvent("weasel-npc:sellDrug", true)
             elseif not status then
                 TriggerServerEvent("weasel-npc:sellDrug", false)
