@@ -42,7 +42,7 @@ Config = {
         vector3(-1000.0, -240.0, 39.0),
         vector3(412.0, -944.0, 49.0),
     },
-    DrugHotspotRadius = 2000.0,
+    DrugHotspotRadius = 500.0,
     DrugHotspotMultiplier = 1.25,
     DrugHotspotSwapTime   = 30      --minutes
 }
