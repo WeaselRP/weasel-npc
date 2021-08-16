@@ -27,11 +27,13 @@ Config = {
     DrugCooldown = 0.5, -- In minutes
     Drugs = {
         {'weed_pouch', 250, 350},
-        {'meth_pouch', 300, 500},
-        {'coke_pouch', 400, 600},
+        {'meth_pouch', 400, 600},
+        {'coke_pouch', 300, 500},
         {'crack_pouch', 350, 500},
         {'lsd_tab', 8, 20},
-        {'dmt_pouch', 200, 600},
+        {'dmt_pouch', 400, 900},
+        {'morphine_pouch', 250, 400},
+        {'heroin_pouch', 300, 900}
     },
     DrugHotspots = {
         vector3(-496.0, -835.0, 35.0),
