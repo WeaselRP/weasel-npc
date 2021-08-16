@@ -33,7 +33,7 @@ Config = {
         {'lsd_tab', 8, 20},
         {'dmt_pouch', 400, 900},
         {'morphine_pouch', 250, 400},
-        {'heroin_pouch', 300, 900}
+        {'heroin_pouch', 500, 900}
     },
     DrugHotspots = {
         vector3(-496.0, -835.0, 35.0),
