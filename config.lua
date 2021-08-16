@@ -26,10 +26,10 @@ Config = {
     DrugDisplayCode = '420',
     DrugCooldown = 0.5, -- In minutes
     Drugs = {
-        {'weed_pouch', 250, 350},
+        {'weed_pouch', 300, 400},
         {'meth_pouch', 400, 600},
-        {'coke_pouch', 300, 500},
-        {'crack_pouch', 350, 500},
+        {'coke_pouch', 350, 500},
+        {'crack_pouch', 300, 450},
         {'lsd_tab', 8, 20},
         {'dmt_pouch', 400, 900},
         {'morphine_pouch', 250, 400},
